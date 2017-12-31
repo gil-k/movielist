@@ -13,10 +13,9 @@ class MovieList extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <fieldset>
+      <div className="App" width="50%">
+        <fieldset  class="fieldset-auto-width">
         <header className="">
-          <h1 className="App-title"></h1>
         </header>
         <p className="App-intro"></p>
 

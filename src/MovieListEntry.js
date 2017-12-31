@@ -6,7 +6,7 @@ class MovieListEntry extends Component {
   render() {
     return (
       <div className="App">
-        <header><fieldset>{this.props.movie.title}
+        <header><fieldset  class="fieldset-auto-width">{this.props.movie.title}
         </fieldset></header>
         <p className="App-intro"></p>
       </div>
