@@ -19,9 +19,10 @@ class MovieList extends Component {
         </header>
         <p className="App-intro"></p>
 
-        {this.state.movies.map((movie) =>
-          <MovieListEntry movie={movie}/>
-        )}
+        {
+          this.state.movies.filter (movie => movie.title.includes(this.props.filterString))
+          .map (movie => <MovieListEntry movie={movie}/>)
+        }
         </fieldset>
       </div>
     );

@@ -11,13 +11,15 @@ class App extends Component {
     this.state = {
       movies: window.movieTitles,
       movie: '',
-      keyword: ''
+      keyword: '',
+      filter: ''
     };
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
   }
 
-  handleSearchInputClick() {
-
+  handleSearchInputClick(value) {
+    // alert(value);
+    this.setState({ filter: value });
   }
 
   render() {
@@ -29,9 +31,9 @@ class App extends Component {
         </header>
         <p className="App-intro"><code></code></p>
 
-        <Search handleInputClick={this.handleSearchInputClick()} />
+        <Search handleSearchButtonClick={this.handleSearchInputClick} />
 
-        <MovieList movies={this.state.movies}/>
+        <MovieList movies={this.state.movies} filterString={this.state.filter}/>
       </div>
     );
   }
