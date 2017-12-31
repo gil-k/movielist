@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-class MovieListEntry extends Component {
+class MovieListEntry extends React.Component {
   render() {
     return (
       <div className="App">
-        <header><fieldset  class="fieldset-auto-width">{this.props.movie.title}
+        <header><fieldset className="fieldset-auto-width">{this.props.movie.title}
         </fieldset></header>
         <p className="App-intro"></p>
       </div>

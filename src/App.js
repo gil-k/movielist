@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import MovieList from './MovieList.js';
+import AddMovies from './AddMovies.js';
 import Search from './Search.js';
 
 class App extends Component {
@@ -15,6 +16,11 @@ class App extends Component {
       filter: ''
     };
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
+    // this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+  }
+
+  handleAddMovieClick(value) {
+    alert(value);
   }
 
   handleSearchInputClick(value) {
@@ -24,12 +30,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div  className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Movie List</h1>
         </header>
         <p className="App-intro"><code></code></p>
+
+        <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
 
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
 

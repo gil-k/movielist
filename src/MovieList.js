@@ -13,15 +13,15 @@ class MovieList extends Component {
   }
   render() {
     return (
-      <div className="App" width="50%">
-        <fieldset  class="fieldset-auto-width">
+      <div width="50%">
+        <fieldset  className="fieldset-auto-width">
         <header className="">
         </header>
         <p className="App-intro"></p>
 
         {
           this.state.movies.filter (movie => movie.title.includes(this.props.filterString))
-          .map (movie => <MovieListEntry movie={movie}/>)
+          .map (movie => <MovieListEntry movie={movie} key={movie.title}/>)
         }
         </fieldset>
       </div>
