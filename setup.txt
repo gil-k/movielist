@@ -1,0 +1,9 @@
+BUILDING WEBPACK
+
+// first npm install -g create-react-app
+
+create-react-app folder-name
+
+cd folder-name
+
+npm start
