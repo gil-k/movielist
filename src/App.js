@@ -10,17 +10,28 @@ class App extends Component {
   constructor(options) {
     super(options);
     this.state = {
-      movies: window.movieTitles,
+      // movies: window.movieTitles,
+      movies: [{title: 'h'}],
       movie: '',
       keyword: '',
-      filter: ''
+      filter: '',
+      key: 0
     };
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
-    // this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+    this.handleAddMovieClick = this.handleAddMovieClick.bind(this);
   }
 
   handleAddMovieClick(value) {
-    alert(value);
+    // var updated = this.state.movies.concat({title: value});
+    this.setState({
+      // key: 0,
+      movies: this.state.movies.concat({title:value})
+      // movies: [...this.state.movies, {title:value}]
+      // movies: updated
+    });
+    this.setState({ key: Math.random() });
+    // this.forceUpdate();
+    // alert(this.state.movies);
   }
 
   handleSearchInputClick(value) {
@@ -41,7 +52,7 @@ class App extends Component {
 
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
 
-        <MovieList movies={this.state.movies} filterString={this.state.filter}/>
+        <MovieList key={this.state.key}  movies={this.state.movies} filterString={this.state.filter}/>
       </div>
     );
   }

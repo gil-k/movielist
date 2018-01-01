@@ -1,9 +1,28 @@
 import mysql from 'mysql';
-var dBconnect = mysql.createConnection(){
-  url: '127.0.0.1:3000',
-  type: 'GET',
-  datatype: 'json',
-  }
-}
-dBconnect.connect();
 
+var connection = mysql.createConnection({
+  user: 'root',
+  password: 'password',
+  database: 'movies'
+});
+connection.connect();
+
+// function fetchAll() {
+//   const queryString = 'select * from groceries';
+//   dBconnect.query(queryString, function(err, result) {
+//     if (err) { console.log(' error in fetching movie list')}
+//     return result;
+//   });
+// }
+
+// function fetchAll() {
+//   const queryString = 'select * from groceries';
+//   dBconnect.query(queryString, (err, result) => {
+//     if (err) { console.log(' error in fetching movie list')}
+//     return result;
+//   });
+// }
+
+// module.exports = {
+//   fetchAll
+// };

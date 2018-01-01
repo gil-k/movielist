@@ -6,4 +6,6 @@ create-react-app folder-name
 
 cd folder-name
 
+npm install mysql --save
+
 npm start
