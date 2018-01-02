@@ -4,44 +4,81 @@ class Search extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      watched: false,
+      towatch: false,
+      watchedBgColor: 'white',
+      toWatchBgColor: 'white'
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleWatchedClick = this.handleWatchedClick.bind(this);
+    this.handleToWatchClick = this.handleToWatchClick.bind(this);
   }
 
-  handleWatchedChange() {
-    this.setState({
-      watched: true
-    })
+  handleWatchedClick(){
+    if (this.state.watched) {
+      this.setState({
+        watched: false,
+        watchedBgColor: 'white'
+      });
+
+    } else {
+      this.setState({
+        watched: true,
+        watchedBgColor: 'green'
+      });
+      if (this.state.towatch) {
+        this.setState({
+          towatch: false,
+          toWatchBgColor: 'white'
+        });
+      }
+    }
+    this.props.handleWatchedButtonClick({watched: this.state.watched, towatch: this.state.towatch});
   }
-  handleToWatchChange() {
-    this.setState({
-      watched: false
-    })
+
+   handleToWatchClick(){
+    if (this.state.towatch) {
+      this.setState({
+        towatch: false,
+        toWatchBgColor: 'white'
+      });
+
+    } else {
+      this.setState({
+
+        towatch: true,
+        toWatchBgColor: 'green'
+      });
+      if (this.state.watched) {
+        this.setState({
+          watched: false,
+          watchedBgColor: 'white'
+        });
+      }
+    }
+    this.props.handleWatchedButtonClick({watched: this.state.watched, towatch: this.state.towatch});
   }
-  handleChange(e) {
+
+  handleInputChange(e){
     this.setState({
       value: e.target.value,
-      watched: false
     });
   }
-
 
   render() {
     return(
 
-      <div class="search-container">
+      <div>
+        <button
+          onClick={this.handleWatchedClick}
+          style={{backgroundColor:this.state.watchedBgColor}}>Watched</button>
 
-      <div class="topnav">
-        <div class="btn-group">
+        <button
+          onClick={this.handleToWatchClick}
+          style={{backgroundColor:this.state.toWatchBgColor}}>To Watch</button>
 
-          <button type="button" class="btn btn-primary" onChange={this.handleWatchedChange} >Watched</button>
-          <button type="button" class="btn btn-primary" onChange={this.handleToWatchChange} >To Watch</button>
-
-        </div>
-      </div>
-
-        <input value={this.state.value} onChange={this.handleChange} type="text" placeholder="Search.." name="search"/>
+        <input value={this.state.value} onChange={this.handleInputChange} type="text" placeholder="Search.." name="search"/>
 
         <button type="submit" onClick={() => this.props.handleSearchButtonClick(this.state.value, this.state.watched)}>
         <i class="fa fa-search"></i>

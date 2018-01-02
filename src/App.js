@@ -21,6 +21,8 @@ class App extends Component {
 
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
 
+    this.handleWatchedButtonClick = this.handleWatchedButtonClick.bind(this);
+
     this.handleAddMovieClick = this.handleAddMovieClick.bind(this);
 
     this.handleMovieListEntryClick = this.handleMovieListEntryClick.bind(this);
@@ -39,6 +41,12 @@ class App extends Component {
    });
   }
 
+  handleWatchedButtonClick(watchedObj) {
+    this.setState({
+      filter: {watched: watchedObj.watched, towatch: watchedObj.towatch, query: ''}
+    });
+  }
+
   handleMovieListEntryClick(movieClicked) {
     var movies = [];
     this.state.movies.forEach(movie => {
@@ -46,7 +54,7 @@ class App extends Component {
         movie.watched = movieClicked.watched;
       }
       movies.concat(movie);
-    })
+    });
   }
 
   render() {
@@ -62,7 +70,7 @@ class App extends Component {
         <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
 
 
-        <Search handleSearchButtonClick={this.handleSearchInputClick} />
+        <Search handleWatchedButtonClick={this.handleWatchedButtonClick} handleSearchButtonClick={this.handleSearchInputClick} />
 
 
         <MovieList
