@@ -15,12 +15,15 @@ class App extends Component {
       movies: [{id: 0, title: 'Cinderella', watched: false}, {id: 1, title: 'Speed', watched: false}, {id: 2, title: 'Spiderman', watched: false}, {id: 3, title: 'Tarzan', watched: false}, {id: 4, title: 'King Kong', watched: false}],
       movie: '',
       keyword: '',
+      MovieListKey: 0,
       key: 0,
-      filter: ''
+      filter: '',
+      watched: false
     };
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
     this.handleAddMovieClick = this.handleAddMovieClick.bind(this);
     this.movieListEntryClick = this.movieListEntryClick.bind(this);
+    this.handleWatchedListClick = this.handleWatchedListClick.bind(this);
   }
 
   handleAddMovieClick(value) {
@@ -50,6 +53,14 @@ class App extends Component {
     this.setState({ filter: value });
   }
 
+  handleWatchedListClick(watched){
+    this.setState({
+      watched: watched
+    });
+    this.setState({ MovieListKey: Math.random() });
+
+  }
+
   render() {
     return (
       <div  className="App">
@@ -62,12 +73,12 @@ class App extends Component {
         <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
 
         <div>
-        <MoviesWatchedList />
+        <MoviesWatchedList handleWatchedListClick={this.handleWatchedListClick} />
 
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
         </div>
 
-        <MovieList movies={this.state.movies} filterString={this.state.filter} handleMovieListEntryClick={this.movieListEntryClick} lastId={this.state.lastId} />
+        <MovieList movies={this.state.movies} filterString={this.state.filter} movieListKey={this.state.MovieListKey} handleMovieListEntryClick={this.movieListEntryClick} watched={this.state.watched} />
       </div>
     );
   }

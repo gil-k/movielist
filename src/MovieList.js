@@ -17,7 +17,7 @@ class MovieList extends Component {
         <fieldset>
 
         {
-          this.state.movies.filter (movie => movie.title.includes(this.props.filterString))
+          this.state.movies.filter (movie => movie.title.includes(this.props.filterString) && movie.watched === this.props.watched)
           .map (movie => <MovieListEntry movie={movie} key={movie.id}
 
           handleMovieListEntryClick={this.props.handleMovieListEntryClick}
