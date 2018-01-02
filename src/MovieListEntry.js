@@ -5,8 +5,8 @@ class MovieListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: false,
-      watched: false,
+      title: this.props.movie.title,
+      watched: this.props.movie.watched,
       bgColor: 'white'
     };
     this.handleClick = this.handleClick.bind(this);
@@ -28,7 +28,7 @@ class MovieListEntry extends React.Component {
         watched: true,
         bgColor: 'green'
       });
-      this.props.movieListEntryClick();
+      this.props.movieListEntryClick({title: this.state.title, watched: this.state.watched });
     }
     // this.setState({
     //   watched: false,
