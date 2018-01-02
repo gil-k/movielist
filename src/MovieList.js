@@ -13,18 +13,18 @@ class MovieList extends Component {
   }
   render() {
     return (
-      <div width="50%">
-        <fieldset  className="fieldset-auto-width">
-        <header className="">
-        </header>
-        <p className="App-intro"></p>
+
+        <fieldset>
 
         {
           this.state.movies.filter (movie => movie.title.includes(this.props.filterString))
-          .map (movie => <MovieListEntry movie={movie} key={movie.title}/>)
+          .map (movie => <MovieListEntry movie={movie} key={movie.id}
+
+          handleMovieListEntryClick={this.props.handleMovieListEntryClick}
+          bgColor = {movie.watched ? 'green' : 'white'}/>)
         }
         </fieldset>
-      </div>
+
     );
   }
 }
