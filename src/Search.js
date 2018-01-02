@@ -21,7 +21,7 @@ class Search extends React.Component {
       <div>
       <input id='searchfield' type='text' placeholder='Search...' value={this.state.value} onChange={this.handleChange.bind(this)}/>
 
-      <input type='button' onClick={() => this.props.handleSearchButtonClick(this.state.value)} value='GO'/>
+      <button  onClick={() => this.props.handleSearchButtonClick(this.state.value, this.state.watched)}>GO</button>
       </div>
     )
   }

@@ -4,6 +4,7 @@ import './App.css';
 
 import MovieList from './MovieList.js';
 import AddMovies from './AddMovies.js';
+import MoviesWatchedList from './MoviesWatchedList.js';
 import Search from './Search.js';
 
 class App extends Component {
@@ -11,7 +12,7 @@ class App extends Component {
     super(options);
     this.state = {
       // movies: window.movieTitles,
-      movies: [{title: 'h'}],
+      movies: [{title: 'Superman'}, {title: 'Spiderman'}, {title: 'Tarzan'}, {title: 'Cinderella'}, {title: 'Speed'}],
       movie: '',
       keyword: '',
       filter: '',
@@ -50,7 +51,11 @@ class App extends Component {
 
         <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
 
+        <div>
+        <MoviesWatchedList />
+
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
+        </div>
 
         <MovieList key={this.state.key}  movies={this.state.movies} filterString={this.state.filter}/>
       </div>
