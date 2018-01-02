@@ -15,6 +15,7 @@ class App extends Component {
       movies: [{id: 0, title: 'Cinderella', watched: false}, {id: 1, title: 'Speed', watched: false}, {id: 2, title: 'Spiderman', watched: false}, {id: 3, title: 'Tarzan', watched: false}, {id: 4, title: 'King Kong', watched: false}],
       movie: '',
       keyword: '',
+      key: 0,
       filter: ''
     };
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
@@ -23,10 +24,18 @@ class App extends Component {
   }
 
   handleAddMovieClick(value) {
+    console.log(value, this.state.movies.length);
+    var movie = {id: this.state.movies.length, title:value, watched: false};
+    var updated = this.state.movies;
+
+    updated.push(movie);
+
     this.setState({
-      movies: this.state.movies.concat({title:value})
-    });
-    this.setState({ key: Math.random() });
+      // movies: this.state.movies.concat(movie)
+      movies: updated
+    },
+    this.setState({ key: Math.random() })
+    );
   }
 
   movieListEntryClick(movie) {
@@ -58,7 +67,7 @@ class App extends Component {
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
         </div>
 
-        <MovieList movies={this.state.movies} filterString={this.state.filter} handleMovieListEntryClick={this.movieListEntryClick}/>
+        <MovieList movies={this.state.movies} filterString={this.state.filter} handleMovieListEntryClick={this.movieListEntryClick} lastId={this.state.lastId} />
       </div>
     );
   }
