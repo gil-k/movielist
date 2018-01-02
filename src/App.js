@@ -10,33 +10,35 @@ class App extends Component {
   constructor(options) {
     super(options);
     this.state = {
-      // movies: window.movieTitles,
-      movies: [{title: 'h'}],
-      movie: '',
-      keyword: '',
-      filter: '',
+      movies: [{title: 'La Cage Aux Folles', watched: false},
+              {title: 'Space Invaders', watched: false},
+              {title: 'Dracula', watched: false},
+              {title: 'Sound of Music', watched: false}],
+
+      filter: {watched: false, towatch: true, query: ''},
       key: 0
     };
+
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
+
     this.handleAddMovieClick = this.handleAddMovieClick.bind(this);
   }
 
   handleAddMovieClick(value) {
-    // var updated = this.state.movies.concat({title: value});
     this.setState({
-      // key: 0,
-      movies: this.state.movies.concat({title:value})
-      // movies: [...this.state.movies, {title:value}]
-      // movies: updated
+      movies: this.state.movies.concat({title:value, watched: false})
     });
     this.setState({ key: Math.random() });
-    // this.forceUpdate();
-    // alert(this.state.movies);
   }
 
-  handleSearchInputClick(value) {
-    // alert(value);
-    this.setState({ filter: value });
+  handleSearchInputClick(filter) {
+    this.setState({
+      filter: filter
+   });
+  }
+
+  handleMovieListEntryClick(title) {
+
   }
 
   render() {
@@ -48,11 +50,14 @@ class App extends Component {
         </header>
         <p className="App-intro"><code></code></p>
 
+
         <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
+
 
         <Search handleSearchButtonClick={this.handleSearchInputClick} />
 
-        <MovieList key={this.state.key}  movies={this.state.movies} filterString={this.state.filter}/>
+
+        <MovieList key={this.state.key}  movies={this.state.movies} filter={this.state.filter} />
       </div>
     );
   }

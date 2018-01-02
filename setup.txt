@@ -9,3 +9,35 @@ cd folder-name
 npm install mysql --save
 
 npm start
+
+
+
+
+
+- - - - -
+
++ react-dom@16.2.0
++ react@16.2.0
++ react-scripts@1.0.17
+added 1267 packages in 24.048s
+
+Success! Created react-app at /Users/max/Documents/nodejs/hr/react-modules/react-app
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd react-app
+  npm start
