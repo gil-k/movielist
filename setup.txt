@@ -9,3 +9,101 @@ cd folder-name
 npm install mysql --save
 
 npm start
+
+
+The Movie Database API:
+
+API Key (v3 auth)
+
+06a4530000a0f10bbd79d66bc9d9decf
+
+API Read Access Token (v4 auth)
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNmE0NTMwMDAwYTBmMTBiYmQ3OWQ2NmJjOWQ5ZGVjZiIsInN1YiI6IjVhNGM5MTQxYzNhMzY4MzhlZDAwNzFhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4Iil5aSyjjdYV3xNDCiB7nT2SiyA1CFeqw3eqN9Dbik
+
+
+Example API Request
+
+https://api.themoviedb.org/3/movie/550?api_key=06a4530000a0f10bbd79d66bc9d9decf
+
+
+curl --request GET --url 'https://api.themoviedb.org/3/account?api_key=06a4530000a0f10bbd79d66bc9d9decf'  --data '{}'
+
+
+https://api.themoviedb.org/3/account?api_key=<<api_key>>
+
+
+
+
+
+
+var http = require("https");
+
+var options = {
+  "method": "GET",
+  "hostname": "api.themoviedb.org",
+  "port": null,
+  "path": "/3/account?api_key=%3C%3Capi_key%3E%3E",
+  //  "path": "/3/movie/%7Bmovie_id%7D?language=en-US&api_key=%3C%3Capi_key%3E%3E", for a movie
+  "headers": {}
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+
+
+var http = require("https");
+
+var options = {
+  "method": "GET",
+  "hostname": "api.themoviedb.org",
+  "port": null,
+  "path": "/3/search/movie?include_adult=false&page=1&language=en-US&api_key=%3C%3Capi_key%3E%3E",
+  "headers": {}
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write("{}");
+req.end();
+
+
+
+
+
+curl --request GET \
+  --url 'https://api.themoviedb.org/3/search/movie?query=Diana&include_adult=false&page=1&language=en-US&api_key=06a4530000a0f10bbd79d66bc9d9decf' \
+  --data '{}'
+
+
+
+
+
+
+
+
+
+
+

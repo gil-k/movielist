@@ -1,18 +1,29 @@
 import React from 'react';
 // import logo from './logo.svg';
+import MovieInfo from './MovieInfo.js';
 import './App.css';
 
 class MovieListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showPanel: false,
+      bgColor: 'lightseagreen',
       // title: this.props.movie.title,
       // watched: this.props.movie.watched,
       // bgColor: (this.props.movie.watched ? 'green' : 'white')
     };
-    // this.handleClick = this.handleClick.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
+  handleTitleClick(){
+
+    this.setState({
+      showPanel: !this.state.showPanel
+    },
+    console.log('hi')
+    );
+  }
   // handleClick(){
   //   if (this.state.bgColor === 'green') {
   //     this.setState({
@@ -29,17 +40,36 @@ class MovieListEntry extends React.Component {
   // }
 
   render() {
-    return (
-      <div>
-        {this.props.movie.title}
+    if (this.state.showPanel) {
+      return (
+        <div>
+          <div>
+            <h3 onClick={this.handleTitleClick} style={{backgroundColor:this.state.bgColor}} >{this.props.movie.title}</h3>
 
-          <button
-            onClick={() => this.props.handleMovieListEntryClick(this.props.movie)}
+              <button
+                onClick={() => this.props.handleMovieListEntryClick(this.props.movie)}
 
-            style={{backgroundColor:this.props.bgColor}}>Watched</button>
+                style={{backgroundColor:this.props.bgColor}} >Watched</button>
 
-      </div>
-    );
+          </div>
+          <MovieInfo />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>
+            <h3 onClick={this.handleTitleClick} style={{backgroundColor:this.state.bgColor}}>{this.props.movie.title}</h3>
+
+              <button
+                onClick={() => this.props.handleMovieListEntryClick(this.props.movie)}
+
+                style={{backgroundColor:this.props.bgColor}} >Watched</button>
+
+          </div>
+        </div>
+      );
+    }
   }
 }
 
