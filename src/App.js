@@ -6,6 +6,8 @@ import MovieList from './MovieList.js';
 import AddMovies from './AddMovies.js';
 import MoviesWatchedList from './MoviesWatchedList.js';
 import Search from './Search.js';
+// import SearchMovieDB from './searchMovieDB.js';
+const http = require('http');
 
 class App extends Component {
   constructor(options) {
@@ -20,15 +22,25 @@ class App extends Component {
       filter: '',
       watched: false
     };
+    // Search Component
     this.handleSearchInputClick = this.handleSearchInputClick.bind(this);
+
+    // Add Movie Component
     this.handleAddMovieClick = this.handleAddMovieClick.bind(this);
-    this.movieListEntryClick = this.movieListEntryClick.bind(this);
+
+    // Movie List Entry Component
+    this.movieWatchedButtonClick = this.movieWatchedButtonClick.bind(this);
+
+    // MoviesWatched Component
     this.handleWatchedListClick = this.handleWatchedListClick.bind(this);
+
+    // this.handleMovieTitleClick = this.handleMovieTitleClick.bind(this);
   }
 
   handleAddMovieClick(value) {
-    console.log(value, this.state.movies.length);
+
     var movie = {id: this.state.movies.length, title:value, watched: false};
+    console.log('added movie is ', movie);
     var updated = this.state.movies;
 
     updated.push(movie);
@@ -36,12 +48,44 @@ class App extends Component {
     this.setState({
       // movies: this.state.movies.concat(movie)
       movies: updated
-    },
-    this.setState({ key: Math.random() })
-    );
+    });
+    // this.setState({ key: Math.random() });
+    // );
+    console.log('calling getMovieData');
+    this.getMovieData();
   }
 
-  movieListEntryClick(movie) {
+  getMovieData(){
+    var movieTitle = '';
+
+    var api_key = '06a4530000a0f10bbd79d66bc9d9decf';
+
+    var options = {
+      "method": "GET",
+      "hostname": "api.themoviedb.org",
+      "port": null,
+      "path": "/3/search/movie?query=Contact&include_adult=false&page=1&language=en-US&api_key=" + api_key,
+      "headers": {}
+    };
+
+    var getMovieData = http.request(options, function (res) {
+      console.log('in getMovieData');
+      var chunks = [];
+      console.log(movieTitle);
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+
+      res.on("end", function () {
+        var body = Buffer.concat(chunks);
+        console.log(body.toString());
+      });
+      console.log('getMovieData completed');
+    });
+    getMovieData();
+  }
+
+  movieWatchedButtonClick(movie) {
     var updated = this.state.movies;
     updated[movie.id].watched = !updated[movie.id].watched;
     this.setState({
@@ -58,8 +102,11 @@ class App extends Component {
       watched: watched
     });
     this.setState({ MovieListKey: Math.random() });
-
   }
+
+  // handleMovieTitleClick(){
+  //   this.setState({ movieInfo: !this.state.movieInfo });
+  // }
 
   render() {
     return (
@@ -73,16 +120,33 @@ class App extends Component {
         <AddMovies handleAddButtonClick={this.handleAddMovieClick} />
 
         <div>
-        <MoviesWatchedList handleWatchedListClick={this.handleWatchedListClick} />
-
-        <Search handleSearchButtonClick={this.handleSearchInputClick} />
+          <MoviesWatchedList handleWatchedListClick={this.handleWatchedListClick} />
+          <Search handleSearchButtonClick={this.handleSearchInputClick} />
         </div>
 
-        <MovieList movies={this.state.movies} filterString={this.state.filter} movieListKey={this.state.MovieListKey} handleMovieListEntryClick={this.movieListEntryClick} watched={this.state.watched} />
+        <MovieList
+          movies={this.state.movies}
+          filterString={this.state.filter}
+          movieListKey={this.state.MovieListKey}
+          watched={this.state.watched}
+
+          handleMovieWatchedClick={this.movieWatchedButtonClick}
+          // handleMovieTitleClick={this.handleMovieTitleClick}
+           />
+          }
       </div>
     );
   }
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
 

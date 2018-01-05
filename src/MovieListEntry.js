@@ -9,6 +9,7 @@ class MovieListEntry extends React.Component {
     this.state = {
       showPanel: false,
       bgColor: 'lightseagreen',
+      info: ''
       // title: this.props.movie.title,
       // watched: this.props.movie.watched,
       // bgColor: (this.props.movie.watched ? 'green' : 'white')
@@ -17,27 +18,12 @@ class MovieListEntry extends React.Component {
   }
 
   handleTitleClick(){
-
     this.setState({
       showPanel: !this.state.showPanel
     },
-    console.log('hi')
+    this.props.handleMovieTitleClick(this.props.movie)
     );
   }
-  // handleClick(){
-  //   if (this.state.bgColor === 'green') {
-  //     this.setState({
-  //       // watched: false,
-  //       bgColor: 'white'
-  //     });
-  //     this.props.handleMovieEntryWatchedClick(this.props.movie.id, false);
-  //   } else {
-  //     this.setState({
-  //       bgColor: 'green'
-  //     });
-  //     this.props.handleMovieEntryWatchedClick(this.props.movie.id, true);
-  //   }
-  // }
 
   render() {
     if (this.state.showPanel) {
@@ -47,7 +33,7 @@ class MovieListEntry extends React.Component {
             <h3 onClick={this.handleTitleClick} style={{backgroundColor:this.state.bgColor}} >{this.props.movie.title}</h3>
 
               <button
-                onClick={() => this.props.handleMovieListEntryClick(this.props.movie)}
+                onClick={() => this.props.handleMovieWatchedClick(this.props.movie)}
 
                 style={{backgroundColor:this.props.bgColor}} >Watched</button>
 
@@ -62,7 +48,7 @@ class MovieListEntry extends React.Component {
             <h3 onClick={this.handleTitleClick} style={{backgroundColor:this.state.bgColor}}>{this.props.movie.title}</h3>
 
               <button
-                onClick={() => this.props.handleMovieListEntryClick(this.props.movie)}
+                onClick={() => this.props.handleMovieWatchedClick(this.props.movie)}
 
                 style={{backgroundColor:this.props.bgColor}} >Watched</button>
 
@@ -75,6 +61,3 @@ class MovieListEntry extends React.Component {
 
 export default MovieListEntry;
 
-              // <button
-              //   onClick={this.handleClick}
-              //   style={{backgroundColor:this.state.bgColor}}>Watched</button>

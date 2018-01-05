@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class AddMovies extends React.Component {
   constructor(props){
     super(props);
@@ -7,6 +8,7 @@ class AddMovies extends React.Component {
       value: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(e) {
@@ -15,18 +17,24 @@ class AddMovies extends React.Component {
     });
     // console.log(this.state.value);
   }
+  handleClick() {
+    console.log('in handleClick');
+    this.props.handleAddButtonClick(this.state.value);
+  }
 
   render() {
     return(
       <div>
-      <input id='inputfield' type='text'
-        placeholder='Add movie title here'
-        value={this.state.value}
-        onChange={this.handleChange.bind(this)}/>
+        <input
+          id='inputfield' type='text'
+          placeholder='Add movie title here'
+          value={this.state.value}
+          onChange={this.handleChange} />
 
-      <input type='button'
-        onClick={() => this.props.handleAddButtonClick(this.state.value)}
-        value='Add'/>
+        <input
+          type='button'
+          onClick={this.handleClick}
+          value='Add' />
       </div>
     )
   }
